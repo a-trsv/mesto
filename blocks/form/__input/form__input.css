@@ -1,0 +1,18 @@
+.form__input {
+  font-family: 'Inter', Arial, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  border: none;
+  text-align: center;
+}
+
+
+@media screen and (max-width: 620px) {
+  .form__input {
+    text-align: left;
+    font-size: 14px;
+    line-height: 17px;
+  }
+}

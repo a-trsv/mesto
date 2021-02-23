@@ -1,0 +1,6 @@
+.element__place {
+  background-color: #ffffff;
+  margin: 0;
+  overflow: hidden;
+  border-radius: 0 0 10px 10px;
+}

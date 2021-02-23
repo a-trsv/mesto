@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="pages/index.css">
+    <title>Mesto - сервис</title>
+</head>
+<body class="page">
+  <header class="header">
+    <img class="header__logo" src="images/logo.svg" alt="Логотип сервиса Mesto">
+    <div class="header__line"></div>
+  </header>
+  <main>
+    <section class="profile">
+      <div class="profile__container">
+        <img class="profile__avatar" src="images/avatar.jpg" alt="Аватар">
+        <div class="profile__info">
+          <div class="profile__zone">
+            <h1 class="profile__title">Жак-Ив Кусто</h1>
+            <button class="profile__edit-button"></button>
+          </div>
+          <p class="profile__caption">Исследователь океана</p>
+        </div>
+      </div>
+      <button class="profile__add-button"></button>
+    </section>
+    <section class="elements">
+      <article class="element">
+        <img class="element__image" src="images/karachaevsk.jpg" alt="Карачаевск">
+        <div class="element__place">
+          <div class="element__place-item">
+            <h2 class="element__title">Карачаевск</h2>
+            <button class="element__like-button"></button>
+          </div>
+        </div>
+      </article>
+      <article class="element">
+        <img class="element__image" src="images/gora-elbrus.jpg" alt="Карачаевск">
+        <div class="element__place">
+          <div class="element__place-item">
+            <h2 class="element__title">Гора Эльбрус</h2>
+            <button class="element__like-button"></button>
+          </div>
+        </div>
+      </article>
+      <article class="element">
+        <img class="element__image" src="images/dombai.jpg" alt="Карачаевск">
+        <div class="element__place">
+          <div class="element__place-item">
+            <h2 class="element__title">Домбай</h2>
+            <button class="element__like-button"></button>
+          </div>
+        </div>
+      </article>
+      <article class="element">
+        <img class="element__image" src="images/gora-elbrus.jpg" alt="Карачаевск">
+        <div class="element__place">
+          <div class="element__place-item">
+            <h2 class="element__title">Гора Эльбрус</h2>
+            <button class="element__like-button"></button>
+          </div>
+        </div>
+      </article>
+      <article class="element">
+        <img class="element__image" src="images/dombai.jpg" alt="Карачаевск">
+        <div class="element__place">
+          <div class="element__place-item">
+            <h2 class="element__title">Домбай</h2>
+            <button class="element__like-button"></button>
+          </div>
+        </div>
+      </article>
+      <article class="element">
+        <img class="element__image" src="images/karachaevo-cherkesk.jpg" alt="Карачаевск">
+        <div class="element__place">
+          <div class="element__place-item">
+            <h2 class="element__title">Карачаево-Черкесск</h2>
+            <button class="element__like-button"></button>
+          </div>
+        </div>
+      </article>
+    </section>
+  </main>
+  <footer class="footer">
+    <p class="footer__copyright">© 2020 Mesto Russia</p>
+  </footer>
+  <div class="popup">
+    <div class="popup__container">
+      <div class="popup__form">
+        <h3 class="popup__title">Редактировать профиль</h3>
+        <form class="form">
+          <input type="text" name="input-name" placeholder="" class="form__input form__input_name">
+          <div class="form__line"></div>
+          <input type="text" name="input-job" placeholder="" class="form__input form__input_job">
+          <div class="form__line"></div>
+          <button type="submit" class="form__save-button">
+            <p class="popup__save-button">Сохранить</p>
+          </button>
+        </form>
+      </div>
+      <button class="popup__close-button"></button>
+    </div>
+  </div>
+<script src="scripts/index.js"></script>
+</body>
+</html>
