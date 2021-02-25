@@ -10,8 +10,5 @@
   white-space: nowrap;
   overflow: hidden;
   padding: 25px 0 31px 21px;
-  text-overflow: ellipsis;
   max-width: 70%;
-  overflow: hidden;
-  white-space: nowrap;
 }
