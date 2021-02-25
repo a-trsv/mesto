@@ -1,29 +1,30 @@
 let editButton = document.querySelector('.profile__edit-button');
 let popUp = document.querySelector('.popup');
 let closeEditButton = document.querySelector('.popup__close-button');
-let saveEditButton = document.querySelector('.form__save-button')
 let formElement = document.querySelector('.form');
-nameInput = document.querySelector('.profile__title').textContent;
-jobInput = document.querySelector('.profile__caption').textContent;
+let profileTitle = document.querySelector('.profile__title');
+let profileCaption = document.querySelector('.profile__caption');
+let nameInput = profileTitle.textContent;
+let jobInput = profileCaption.textContent;
+let inputName = document.getElementsByName('input-name');
+let inputJob = document.getElementsByName('input-job');
+let newName = document.querySelector('.form__input_type_name');
+let newJob = document.querySelector('.form__input_type_job');
 
 // Получаем актуальные значения в placeholder
-document.getElementsByName('input-name')[0].value = nameInput;
-document.getElementsByName('input-job')[0].value = jobInput;
-
+function getCurrentNameAndJob () {
+inputName[0].value = profileTitle.textContent;
+inputJob[0].value = profileCaption.textContent;
+}
 // Функция открытия и закрытия попапа
 function togglePopUp() {
-  popUp.classList.toggle('popup__active');
+  popUp.classList.toggle('popup_active');
+  getCurrentNameAndJob ();
 }
 
-// Открытие и закрытие попапа
-editButton.addEventListener('click', togglePopUp);
-closeEditButton.addEventListener('click', togglePopUp);
-saveEditButton.addEventListener('click', togglePopUp);
-
 // Для закрытия открытого попапа по кнопке
-function closePopUp () {
-  popUp.classList.remove('popup__active');
-  popUp.classList.add('popup');
+function closePopUp() {
+  popUp.classList.remove('popup_active');
 }
 
 // Получите значение полей jobInput и nameInput из свойства value
@@ -32,13 +33,15 @@ function closePopUp () {
 
 function formSubmitHandler (evt) {
   evt.preventDefault();
-  document.querySelector('.profile__title').textContent = (document.querySelector('.form__input_name').value);
-  document.querySelector('.profile__caption').textContent = (document.querySelector('.form__input_job').value);
-  document.addEventListener('keydown', function (event) {
-    if (event.key === 'Enter') {
-      closePopUp();
-    }
-  });
+  profileTitle.textContent = (newName.value);
+  profileCaption.textContent = (newJob.value);
+  closePopUp();
+
 }
 
+// Сохранить введенные данные
 formElement.addEventListener('submit', formSubmitHandler);
+
+// Открытие и закрытие попапа
+editButton.addEventListener('click', togglePopUp);
+closeEditButton.addEventListener('click', togglePopUp);

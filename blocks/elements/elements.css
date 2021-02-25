@@ -3,7 +3,6 @@
   display: grid;
   grid-gap: 20px 17px;
   grid-template-columns: repeat(auto-fill, 282px);
-  overflow: hidden;
   justify-content: center;
 }
 
