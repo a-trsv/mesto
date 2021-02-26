@@ -24,7 +24,7 @@ function closePopUp() {
   popUp.classList.remove('popup_active');
 }
 
-// Получите значение полей jobInput и nameInput из свойства value
+// Получите значение полей из свойства value
 // Выберите элементы, куда должны быть вставлены значения полей
 // Вставьте новые значения с помощью textContent
 function formSubmitHandler (evt) {
