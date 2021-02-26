@@ -4,18 +4,15 @@ let closeEditButton = document.querySelector('.popup__close-button');
 let formElement = document.querySelector('.form');
 let profileTitle = document.querySelector('.profile__title');
 let profileCaption = document.querySelector('.profile__caption');
-let nameInput = profileTitle.textContent;
-let jobInput = profileCaption.textContent;
-let inputName = document.getElementsByName('input-name');
-let inputJob = document.getElementsByName('input-job');
 let newName = document.querySelector('.form__input_type_name');
 let newJob = document.querySelector('.form__input_type_job');
 
 // Получаем актуальные значения в placeholder
-function getCurrentNameAndJob () {
-inputName[0].value = profileTitle.textContent;
-inputJob[0].value = profileCaption.textContent;
+function getCurrentNameAndJob() {
+  newName.value = profileTitle.textContent;
+  newJob.value = profileCaption.textContent;
 }
+
 // Функция открытия и закрытия попапа
 function togglePopUp() {
   popUp.classList.toggle('popup_active');
@@ -30,11 +27,10 @@ function closePopUp() {
 // Получите значение полей jobInput и nameInput из свойства value
 // Выберите элементы, куда должны быть вставлены значения полей
 // Вставьте новые значения с помощью textContent
-
 function formSubmitHandler (evt) {
   evt.preventDefault();
-  profileTitle.textContent = (newName.value);
-  profileCaption.textContent = (newJob.value);
+  profileTitle.textContent = newName.value;
+  profileCaption.textContent = newJob.value;
   closePopUp();
 
 }
