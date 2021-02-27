@@ -9,9 +9,14 @@
   text-align: center;
   color: #FFFFFF;
   border: none;
+  border-radius: 2px;
   width: 358px;
   padding-top: 14px;
   padding-bottom: 18px;
+}
+
+.form__save-button:hover {
+  opacity: 0.8;
   cursor: pointer;
 }
 

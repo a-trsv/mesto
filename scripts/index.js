@@ -40,4 +40,4 @@ formElement.addEventListener('submit', formSubmitHandler);
 
 // Открытие и закрытие попапа
 editButton.addEventListener('click', togglePopUp);
-closeEditButton.addEventListener('click', togglePopUp);
+closeEditButton.addEventListener('click', closePopUp);
