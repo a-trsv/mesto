@@ -119,7 +119,7 @@ function addCardsListener(element) {
    const imageCaption = element.querySelector('.element__title');
    imageLink.addEventListener('click', function togglePopUpPhoto(){
     popUpPhoto.classList.toggle('popup_active');
-    const popUpPhotoSRC = document.querySelector('.element__image_photo');
+    const popUpPhotoSRC = document.querySelector('.popup__image');
     popUpPhotoSRC.src = imageLink.src;
     const popUpPhotoCaption = document.querySelector('.popup__title_type_photo');
     popUpPhotoCaption.textContent = imageCaption.textContent;
