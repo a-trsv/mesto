@@ -26,7 +26,7 @@ const initialCards = [
   },
   {
     name: 'Челябинская область',
-    link: 'http://hs-play.net/uploads/images/chelyabinsk-oblast.jpg'
+    link: 'https://pubg.pw/wp-content/uploads/chelyabinsk-oblast.jpg'
   },
   {
     name: 'Иваново',
