@@ -22,69 +22,63 @@
           <p class="profile__caption">Исследователь океана</p>
         </div>
       </div>
-      <button aria-label="Добавьте свою фотографию!" type="button" class="profile__add-button"></button>
+      <button aria-label="Добавьте свою карточку!" type="button" class="profile__add-button"></button>
     </section>
-    <section class="elements">
-      <article class="element">
-        <img class="element__image" src="images/karachaevsk.jpg" alt="Карачаевск">
-        <div class="element__place">
-          <h2 class="element__title">Карачаевск</h2>
-          <button aria-label="Оцените фотографию!" type="button" class="element__like-button"></button>
-        </div>
-      </article>
-      <article class="element">
-        <img class="element__image" src="images/gora-elbrus.jpg" alt="Карачаевск">
-        <div class="element__place">
-          <h2 class="element__title">Гора Эльбрус</h2>
-          <button aria-label="Оцените фотографию!" type="button" class="element__like-button"></button>
-        </div>
-      </article>
-      <article class="element">
-        <img class="element__image" src="images/dombai.jpg" alt="Карачаевск">
-        <div class="element__place">
-          <h2 class="element__title">Домбай</h2>
-          <button aria-label="Оцените фотографию!" type="button" class="element__like-button"></button>
-        </div>
-      </article>
-      <article class="element">
-        <img class="element__image" src="images/gora-elbrus.jpg" alt="Карачаевск">
-        <div class="element__place">
-          <h2 class="element__title">Гора Эльбрус</h2>
-          <button aria-label="Оцените фотографию!" type="button" class="element__like-button"></button>
-        </div>
-      </article>
-      <article class="element">
-        <img class="element__image" src="images/dombai.jpg" alt="Карачаевск">
-        <div class="element__place">
-          <h2 class="element__title">Домбай</h2>
-          <button aria-label="Оцените фотографию!" type="button" class="element__like-button"></button>
-        </div>
-      </article>
-      <article class="element">
-        <img class="element__image" src="images/karachaevo-cherkesk.jpg" alt="Карачаевск">
-        <div class="element__place">
-          <h2 class="element__title">Карачаево-Черкесск</h2>
-          <button aria-label="Оцените фотографию!" type="button" class="element__like-button"></button>
-        </div>
-      </article>
-    </section>
+    <section class="elements"><!--Загружаем через JS--></section>
   </main>
   <footer class="footer">
     <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
   </footer>
-  <div class="popup">
+  <!--popup для изменения имени и деятельности-->
+  <div class="popup popup_type_edit">
     <div class="popup__container">
       <h2 class="popup__title">Редактировать профиль</h2>
-      <form name="editProfileForm" class="form">
+      <form name="editProfileForm" class="form form_type_edit">
         <input type="text" name="inputName" placeholder="Введите Ваше имя"
         class="form__input form__input_type_name">
         <input type="text" name="inputJob" placeholder="Чем занимаетесь?"
         class="form__input form__input_type_job">
         <button type="submit"  class="form__save-button">Сохранить</button>
       </form>
-      <button aria-label="Отменить изменения" type="button" class="popup__close-button"></button>
+      <button aria-label="Отменить изменения" type="button"
+      class="popup__close-button popup__close-button_type_edit"></button>
     </div>
   </div>
+  <!--popup для добавления карточки-->
+  <div class="popup popup_type_add">
+    <div class="popup__container">
+      <h2 class="popup__title">Новое место</h2>
+      <form name="addForm" class="form form_type_add">
+        <input type="text" name="inputAddTitle" placeholder="Название"
+        class="form__input form__input_type_addTitle">
+        <input type="text" name="inputURL" placeholder="Ссылка на картинку"
+        class="form__input form__input_type_addURL">
+        <button type="submit"  class="form__save-button">Сохранить</button>
+      </form>
+      <button aria-label="Отменить изменения" type="button"
+      class="popup__close-button popup__close-button_type_add"></button>
+    </div>
+  </div>
+  <!--popup для отображения полной картинки-->
+  <div class="popup popup_type_photo">
+    <div class="popup__container popup__container_type_photo">
+      <img class="element__image element__image_type_photo" src="#" alt="">
+      <h2 class="popup__title popup__title_type_photo"></h2>
+      <button aria-label="Закрыть окно просмотра" type="button"
+      class="popup__close-button popup__close-button_type_photo"></button>
+    </div>
+  </div>
+ <!--шаблон для добавления карточек-->
+ <template class="cardsTemplate">
+  <article class="element">
+    <button aria-label="Удалить карточку" type="button" class="element__delete-button"></button>
+    <img class="element__image" src="#" alt="">
+    <div class="element__place">
+      <h2 class="element__title"></h2>
+      <button aria-label="Оцените фотографию!" type="button" class="element__like-button"></button>
+    </div>
+  </article>
+ </template>
 <script src="scripts/index.js"></script>
 </body>
 </html>

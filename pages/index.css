@@ -28,3 +28,71 @@
 @import url(../blocks/form/form.css);
 @import url(../blocks/form/__input/form__input.css);
 @import url(../blocks/form/__save-button/form__save-button.css);
+
+.element__delete-button {
+  background-image: url(/images/delete-button.svg);
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-size: contain;
+  position: absolute;
+  top: 18px;
+  right: 15px;
+  width: 18px;
+  height: 19.3px;
+  border: none;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.element__delete-button:hover {
+  opacity: 0.6;
+}
+
+.element__like-button_active {
+  background-image: url(../../../images/like-button-active.svg);
+  opacity: 1;
+}
+
+.popup_type_photo {
+  background-color: rgba(0, 0, 0, 1);
+  margin: 0;
+  padding: 0;
+}
+
+.popup__container_type_photo {
+  background-color: transparent;
+  border: none;
+  width: auto;
+}
+
+.element__image_type_photo {
+  width: auto;
+  height: auto;
+  max-width: 75vw;
+  max-height: 75vh;
+  border-radius: 0;
+}
+
+@media screen and (max-width: 620px) {
+  .element__image_type_photo {
+   width: 282px;
+  }
+}
+
+.popup__title_type_photo {
+  margin: 10px auto 0 0;
+  width: 291px;
+  height: 12px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 15px;
+  color: #FFFFFF;
+  font-family: 'Inter', Arial, sans-serif;
+}
+
+@media screen and (max-width: 384px) {
+  .popup__title_type_photo {
+   width: 240px;
+  }
+}
