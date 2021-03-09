@@ -98,21 +98,21 @@ function openPopup(popup) {
   popup.classList.add('popup_active');
 }
 
-// Ищем уже открытый попап
+// Ищем уже открытый попап и закрываем его
 function closePopUp() {
-  const openedPopup = document.querySelector('.popup_active')
+  const openedPopup = document.querySelector('.popup_active');
   openedPopup.classList.remove('popup_active');
 }
 
 // Функция открытия попапа для измения имени и деятельности
 function togglePopUp() {
-  openPopup(popUpEdit)
+  openPopup(popUpEdit);
   getCurrentNameAndJob ();
 }
 
 // Открываем попап для добавления карточки
 function togglePopUpAdd() {
-  openPopup(popUpAdd)
+  openPopup(popUpAdd);
 }
 
 // Ищем клики для удаления карточки
