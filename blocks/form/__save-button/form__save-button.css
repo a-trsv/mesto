@@ -13,6 +13,7 @@
   width: 358px;
   padding-top: 14px;
   padding-bottom: 18px;
+  outline: none;
 }
 
 .form__save-button:hover {

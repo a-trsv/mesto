@@ -18,6 +18,10 @@ const cardsContainer = document.querySelector('.elements');
 const formElementAdd = document.querySelector('.form_type_add');
 const templateElement = document.querySelector('.cardsTemplate');
 
+// Для работы с отображением полного вида картинок
+const inputName = formElementAdd.querySelector('.form__input_type_addTitle');
+const inputSRC = formElementAdd.querySelector('.form__input_type_addURL');
+
 // Данные для загрузки карточек по умолчанию
 const initialCards = [
   {
@@ -82,17 +86,6 @@ function cardsRender() {
 }
 cardsRender();
 
-// Функция открытия и закрытия попапа
-function togglePopUp() {
-  popUpEdit.classList.toggle('popup_active');
-  getCurrentNameAndJob ();
-}
-
-// Открываем и закрываем попап для добавления карточки
-function togglePopUpAdd() {
-  popUpAdd.classList.toggle('popup_active');
-}
-
 // функция удаления карточки
 function deleteCard(evt) {
 	const target = evt.target;
@@ -100,11 +93,26 @@ function deleteCard(evt) {
 	currentCard.remove();
 }
 
-// Для закрытия открытого попапа по кнопке
+// Функции открытия и закрытия любого попапа
+function openPopup(popup) {
+  popup.classList.add('popup_active');
+}
+
+// Ищем уже открытый попап
 function closePopUp() {
-  popUpEdit.classList.remove('popup_active');
-  popUpAdd.classList.remove('popup_active');
-  popUpPhoto.classList.remove('popup_active');
+  const openedPopup = document.querySelector('.popup_active')
+  openedPopup.classList.remove('popup_active');
+}
+
+// Функция открытия попапа для измения имени и деятельности
+function togglePopUp() {
+  openPopup(popUpEdit)
+  getCurrentNameAndJob ();
+}
+
+// Открываем попап для добавления карточки
+function togglePopUpAdd() {
+  openPopup(popUpAdd)
 }
 
 // Ищем клики для удаления карточки
@@ -118,7 +126,7 @@ function addCardsListener(element) {
    const imageLink =  element.querySelector('.element__image');
    const imageCaption = element.querySelector('.element__title');
    imageLink.addEventListener('click', function togglePopUpPhoto(){
-    popUpPhoto.classList.toggle('popup_active');
+    openPopup(popUpPhoto); // Применяем общую функцию открытия попапа
     const popUpPhotoSRC = document.querySelector('.popup__image');
     popUpPhotoSRC.src = imageLink.src;
     const popUpPhotoCaption = document.querySelector('.popup__title_type_photo');
@@ -147,9 +155,7 @@ function formSubmitHandler (evt) {
 // затем очищаем placeholder на значение по умолчанию
 function addTaskFormListener(evt) {
 	evt.preventDefault();
-	const inputName = formElementAdd.querySelector('.form__input_type_addTitle');
 	const inputTitle = inputName.value;
-  const inputSRC = formElementAdd.querySelector('.form__input_type_addURL');
   const inputLink = inputSRC.value;
 	const newTask = createCard({ name: inputTitle, link: inputLink});
 	addCardsListener(newTask);
