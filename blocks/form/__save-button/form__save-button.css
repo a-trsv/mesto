@@ -1,5 +1,5 @@
 .form__save-button {
-  margin: 48px auto 37px auto;
+  margin: 0 auto 37px auto;
   background-color: #000;
   font-family: 'Inter', Arial, sans-serif;
   font-style: normal;
@@ -21,9 +21,14 @@
   cursor: pointer;
 }
 
+.form__save-button:disabled {
+  opacity: 0.2;
+  cursor: default;
+}
+
 @media screen and (max-width: 622px) {
   .form__save-button {
-    margin: 45px auto 25px auto;
+    margin: 0 auto 25px auto;
     font-size: 14px;
     line-height: 17px;
     width: 238px;

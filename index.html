@@ -33,12 +33,14 @@
   <div class="popup popup_type_edit">
     <div class="popup__container">
       <h2 class="popup__title">Редактировать профиль</h2>
-      <form name="editProfileForm" class="form form_type_edit">
-        <input type="text" name="inputName" placeholder="Введите Ваше имя"
-        class="form__input form__input_type_name">
-        <input type="text" name="inputJob" placeholder="Чем занимаетесь?"
-        class="form__input form__input_type_job">
-        <button type="submit"  class="form__save-button">Сохранить</button>
+      <form name="editProfileForm" class="form form_type_edit" novalidate>
+        <input type="text" id="inputName" name="inputName" placeholder="Введите Ваше имя"
+        class="form__input form__input_type_name" minlength="2" maxlength="40" required>
+        <span class='form__error' id="inputName-error"></span>
+        <input type="text" id="inputJob" name="inputJob" placeholder="Чем занимаетесь?"
+        class="form__input form__input_type_job" minlength="2" maxlength="200" required>
+        <span class='form__error' id="inputJob-error"></span>
+        <button type="submit" class="form__save-button">Сохранить</button>
       </form>
       <button aria-label="Отменить изменения" type="button"
       class="popup__close-button popup__close-button_type_edit"></button>
@@ -48,11 +50,13 @@
   <div class="popup popup_type_add">
     <div class="popup__container">
       <h2 class="popup__title">Новое место</h2>
-      <form name="addForm" class="form form_type_add">
-        <input type="text" name="inputAddTitle" placeholder="Название"
-        class="form__input form__input_type_addTitle">
-        <input type="text" name="inputURL" placeholder="Ссылка на картинку"
-        class="form__input form__input_type_addURL">
+      <form name="addForm" class="form form_type_add" novalidate>
+        <input type="text" id="inputAddTitle" name="inputAddTitle" placeholder="Название"
+        class="form__input form__input_type_addTitle" minlength="2" maxlength="30" required>
+        <span class='form__error' id="inputAddTitle-error"></span>
+        <input type="url" id="inputURL" name="inputURL" placeholder="Ссылка на картинку"
+        class="form__input form__input_type_addURL" required>
+        <span class='form__error' id="inputURL-error"></span>
         <button type="submit"  class="form__save-button">Сохранить</button>
       </form>
       <button aria-label="Отменить изменения" type="button"
@@ -80,5 +84,6 @@
   </article>
  </template>
 <script src="scripts/index.js"></script>
+<script src="scripts/validate.js"></script>
 </body>
 </html>

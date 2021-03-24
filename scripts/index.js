@@ -96,12 +96,32 @@ function deleteCard(evt) {
 // Функции открытия и закрытия любого попапа
 function openPopup(popup) {
   popup.classList.add('popup_active');
+  // Накладываем слушатель клика ESC
+  document.addEventListener('keydown', regESCButtonPressed);
+  document.addEventListener('click', regPopUpMissedClick);
 }
 
 // Ищем уже открытый попап и закрываем его
 function closePopUp() {
   const openedPopup = document.querySelector('.popup_active');
   openedPopup.classList.remove('popup_active');
+  // Снимаем слушатель клика ESC
+  document.removeEventListener('keydown', regESCButtonPressed);
+  document.removeEventListener('click', regPopUpMissedClick);
+}
+
+// Закрываем попап по нажатию esc
+function regESCButtonPressed(evt) {
+  if(evt.key === "Escape") {
+    closePopUp();
+  }
+}
+
+// Закрываем попап по клику вне его области
+function regPopUpMissedClick(evt) {
+  if(evt.target.classList.contains('popup')) {
+    closePopUp();
+  }
 }
 
 // Функция открытия попапа для измения имени и деятельности
@@ -144,7 +164,7 @@ function getCurrentNameAndJob() {
 // Получите значение полей из свойства value
 // Выберите элементы, куда должны быть вставлены значения полей
 // Вставьте новые значения с помощью textContent
-function formSubmitHandler (evt) {
+function formSubmitHandler(evt) {
   evt.preventDefault();
   profileTitle.textContent = newName.value;
   profileCaption.textContent = newJob.value;
