@@ -1,3 +1,9 @@
+// Sprint 7
+import { Card } from './Card.js';
+import { initialCards, validSettings } from './constants.js';
+import { FormValidator } from './FormValidator.js';
+//Sprint7
+
 // Задаем имя для попапа редактирования имени и деятельности
 const popUpEdit = document.querySelector('.popup_type_edit');
 
@@ -14,41 +20,11 @@ const newName = document.querySelector('.form__input_type_name');
 const newJob = document.querySelector('.form__input_type_job');
 
 // Создаем константы для работы шаблона с карточками
-const cardsContainer = document.querySelector('.elements');
 const formElementAdd = document.querySelector('.form_type_add');
-const templateElement = document.querySelector('.cardsTemplate');
 
 // Для работы с отображением полного вида картинок
 const inputName = formElementAdd.querySelector('.form__input_type_addTitle');
 const inputSRC = formElementAdd.querySelector('.form__input_type_addURL');
-
-// Данные для загрузки карточек по умолчанию
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pubg.pw/wp-content/uploads/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
 
 // Кнопки
 // Кнопки для попапа изменения имени и деятельности
@@ -63,35 +39,6 @@ const closeAddButton = document.querySelector('.popup__close-button_type_add');
 const closePopUpPhotoButton = document.querySelector('.popup__close-button_type_photo');
 
 // Функции
-// Создаем карточки
-function createCard(item) {
-	const newItem = templateElement.content.cloneNode(true);
-	const title = newItem.querySelector('.element__title');
-	title.textContent = item.name;
-  const URL = newItem.querySelector('.element__image');
-  URL.src = item.link;
-  URL.alt = ('На фото:' + ' ' + item.name);
-	return newItem;
-}
-
-// Рендер страницы с карточками
-function cardsRender() {
-	const result = initialCards.map(function(item) {
-		const newTask = createCard(item);
-    addCardsListener(newTask);
-		return newTask;
-	});
-
-	cardsContainer.append(...result);
-}
-cardsRender();
-
-// функция удаления карточки
-function deleteCard(evt) {
-	const target = evt.target;
-	const currentCard = target.closest('.element');
-	currentCard.remove();
-}
 
 // Функции открытия и закрытия любого попапа
 function openPopup(popup) {
@@ -99,6 +46,7 @@ function openPopup(popup) {
   // Накладываем слушатель клика ESC
   document.addEventListener('keydown', regESCButtonPressed);
   document.addEventListener('click', regPopUpMissedClick);
+  clearFormErrors();
 }
 
 // Ищем уже открытый попап и закрываем его
@@ -108,6 +56,21 @@ function closePopUp() {
   // Снимаем слушатель клика ESC
   document.removeEventListener('keydown', regESCButtonPressed);
   document.removeEventListener('click', regPopUpMissedClick);
+  formElementAdd.reset();
+}
+
+// Поиск и удаление ошибок в форме при закрытии невалидной формы
+function clearFormErrors() {
+  // Очистка span
+  const formError = document.querySelectorAll('.form__error');
+  formError.forEach((error) => {
+    error.classList.remove('form__error_type_visible');
+  });
+  // Снятие красного бордера
+  const inputError = document.querySelectorAll('.form__input');
+  inputError.forEach((error) => {
+    error.classList.remove('form__input_type_error');
+  });
 }
 
 // Закрываем попап по нажатию esc
@@ -135,26 +98,6 @@ function togglePopUpAdd() {
   openPopup(popUpAdd);
 }
 
-// Ищем клики для удаления карточки
-function addCardsListener(element) {
-	const deleteButton = element.querySelector('.element__delete-button');
-	deleteButton.addEventListener('click', deleteCard);
-  // Добавляем возможность проставить лайк
-  element.querySelector('.element__like-button').addEventListener('click', function(evt) {
-    evt.target.classList.toggle('element__like-button_active');
-   });
-   const imageLink =  element.querySelector('.element__image');
-   const imageCaption = element.querySelector('.element__title');
-   imageLink.addEventListener('click', function togglePopUpPhoto(){
-    openPopup(popUpPhoto); // Применяем общую функцию открытия попапа
-    const popUpPhotoSRC = document.querySelector('.popup__image');
-    popUpPhotoSRC.src = imageLink.src;
-    const popUpPhotoCaption = document.querySelector('.popup__title_type_photo');
-    popUpPhotoCaption.textContent = imageCaption.textContent;
-
-  });
-}
-
 // Получаем актуальные значения в placeholder
 function getCurrentNameAndJob() {
   newName.value = profileTitle.textContent;
@@ -171,15 +114,15 @@ function formSubmitHandler(evt) {
   closePopUp();
 }
 
-// Добавляем имя и картинку в карточку, после добавления обновялем слушатель клика на иконку удаления,
+// Добавляем имя и картинку в карточку, после добавления обновляем слушатель клика на иконку удаления,
 // затем очищаем placeholder на значение по умолчанию
 function addTaskFormListener(evt) {
 	evt.preventDefault();
 	const inputTitle = inputName.value;
   const inputLink = inputSRC.value;
-	const newTask = createCard({ name: inputTitle, link: inputLink});
-	addCardsListener(newTask);
-	cardsContainer.prepend(newTask);
+  const card = new Card({ name: inputTitle, link: inputLink});
+	const cardElement = card.generateCard();
+	elements.prepend(cardElement);
 	inputName.value = '';
   inputSRC.value = '';
   closePopUp();
@@ -201,3 +144,25 @@ closeAddButton.addEventListener('click', closePopUp);
 
 // Закрытие попапа просмотра фотографии по кнопке
 closePopUpPhotoButton.addEventListener('click', closePopUp);
+
+// Sprint 7
+// Находим контейнер, в котором будут карточки: <section class="elements">
+const elements = document.querySelector('.elements');
+
+initialCards.forEach((item) => {
+  const card = new Card (item);
+	const cardElement = card.generateCard();
+	elements.append(cardElement);
+});
+
+// Подключаем валидацию форм
+const editFormValidator = new FormValidator(validSettings, popUpEdit);
+const cardFormValidator = new FormValidator(validSettings, popUpAdd);
+editFormValidator.enableValidation();
+cardFormValidator.enableValidation();
+//Sprint7 END
+
+export {
+  popUpPhoto,
+  openPopup,
+}
