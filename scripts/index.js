@@ -10,6 +10,9 @@ const popUpEdit = document.querySelector('.popup_type_edit');
 // Задаем имя для попапа добавления карточки
 const popUpAdd = document.querySelector('.popup_type_add');
 
+const editFormValidator = new FormValidator(validSettings, popUpEdit);
+const cardFormValidator = new FormValidator(validSettings, popUpAdd);
+
 // Задаем имя для Попапа с картинкой
 const popUpPhoto = document.querySelector('.popup_type_photo');
 
@@ -23,6 +26,8 @@ const newJob = document.querySelector('.form__input_type_job');
 const formElementAdd = document.querySelector('.form_type_add');
 
 // Для работы с отображением полного вида картинок
+const popUpPhotoSRC = document.querySelector('.popup__image');
+const popUpPhotoCaption = document.querySelector('.popup__title_type_photo');
 const inputName = formElementAdd.querySelector('.form__input_type_addTitle');
 const inputSRC = formElementAdd.querySelector('.form__input_type_addURL');
 
@@ -44,9 +49,13 @@ const closePopUpPhotoButton = document.querySelector('.popup__close-button_type_
 function openPopup(popup) {
   popup.classList.add('popup_active');
   // Накладываем слушатель клика ESC
+  formElementAdd.reset();
   document.addEventListener('keydown', regESCButtonPressed);
   document.addEventListener('click', regPopUpMissedClick);
-  clearFormErrors();
+  // Sprint 7
+  // Подключаем валидацию форм в момент открытия попапа
+  editFormValidator.enableValidation();
+  cardFormValidator.enableValidation();
 }
 
 // Ищем уже открытый попап и закрываем его
@@ -56,21 +65,6 @@ function closePopUp() {
   // Снимаем слушатель клика ESC
   document.removeEventListener('keydown', regESCButtonPressed);
   document.removeEventListener('click', regPopUpMissedClick);
-  formElementAdd.reset();
-}
-
-// Поиск и удаление ошибок в форме при закрытии невалидной формы
-function clearFormErrors() {
-  // Очистка span
-  const formError = document.querySelectorAll('.form__error');
-  formError.forEach((error) => {
-    error.classList.remove('form__error_type_visible');
-  });
-  // Снятие красного бордера
-  const inputError = document.querySelectorAll('.form__input');
-  inputError.forEach((error) => {
-    error.classList.remove('form__input_type_error');
-  });
 }
 
 // Закрываем попап по нажатию esc
@@ -120,13 +114,26 @@ function addTaskFormListener(evt) {
 	evt.preventDefault();
 	const inputTitle = inputName.value;
   const inputLink = inputSRC.value;
-  const card = new Card({ name: inputTitle, link: inputLink});
-	const cardElement = card.generateCard();
-	elements.prepend(cardElement);
-	inputName.value = '';
-  inputSRC.value = '';
+  renderCard({ name: inputTitle, link: inputLink}, true);
+  formElementAdd.reset();
   closePopUp();
 }
+
+function createCard (item) {
+  const card = new Card (item, '.cardsTemplate');
+	return card.generateCard();
+}
+
+function renderCard (item, toEnd) {
+  const card = createCard(item);
+  const container = document.querySelector('.elements');
+  const method = toEnd ? 'prepend' : 'append';
+  container[method](card);
+}
+
+initialCards.forEach((item) => {
+  renderCard(item);
+});
 
 // Сохранить введенные данные для создания карточки и обновить содержимое всех карточек
 formElementAdd.addEventListener('submit', addTaskFormListener);
@@ -145,24 +152,9 @@ closeAddButton.addEventListener('click', closePopUp);
 // Закрытие попапа просмотра фотографии по кнопке
 closePopUpPhotoButton.addEventListener('click', closePopUp);
 
-// Sprint 7
-// Находим контейнер, в котором будут карточки: <section class="elements">
-const elements = document.querySelector('.elements');
-
-initialCards.forEach((item) => {
-  const card = new Card (item);
-	const cardElement = card.generateCard();
-	elements.append(cardElement);
-});
-
-// Подключаем валидацию форм
-const editFormValidator = new FormValidator(validSettings, popUpEdit);
-const cardFormValidator = new FormValidator(validSettings, popUpAdd);
-editFormValidator.enableValidation();
-cardFormValidator.enableValidation();
-//Sprint7 END
-
 export {
+  popUpPhotoSRC,
+  popUpPhotoCaption,
   popUpPhoto,
   openPopup,
 }

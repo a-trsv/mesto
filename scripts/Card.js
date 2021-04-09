@@ -1,15 +1,16 @@
-import { openPopup, popUpPhoto } from './index.js'
+import { popUpPhotoSRC, popUpPhotoCaption, openPopup, popUpPhoto } from './index.js'
 class Card {
-  constructor(item) {
+  constructor(item, cardSelector) {
     this._name = item.name
     this._url = item.link
     // Подпись для попапа с картинкой
     this._caption = item.name
+    this._cardSelector = cardSelector
   }
 
   _getTemplate() {
     const cardElement = document
-    .querySelector('.cardsTemplate')
+    .querySelector(this._cardSelector)
     .content
     .querySelector('.element')
     .cloneNode(true);
@@ -40,22 +41,20 @@ class Card {
 
   _handleOpenImageClick() {
     openPopup(popUpPhoto); // Применяем общую функцию открытия попапа
-    const popUpPhotoSRC = document.querySelector('.popup__image');
     popUpPhotoSRC.src = this._url;
     popUpPhotoSRC.alt = ('Крупным планом:' + ' ' + this._name);
-    const popUpPhotoCaption = document.querySelector('.popup__title_type_photo');
     popUpPhotoCaption.textContent = this._name;
   }
 
   generateCard() {
     this._element = this._getTemplate();
-    this._setEventListeners(); // навесим слушатели кликов лайка и удаления карточик
 
     this._element.querySelector('.element__title').textContent = this._name;
     this._element.querySelector('.element__image').src = this._url;
     this._element.querySelector('.element__image').alt = ('На фото:' + ' ' + this._name);
-
+    this._setEventListeners(); // навесим слушатели кликов лайка и удаления карточик
     return this._element;
+    
     }
   }
 
