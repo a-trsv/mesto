@@ -11,7 +11,7 @@ class FormValidator {
 
   resetValidation() {
     this._inputList.forEach((inputElement) => {
-      this._hideInputEror(inputElement)
+      this._hideInputError(inputElement)
     });
 
     this._toggleSaveButtonState();
@@ -43,7 +43,7 @@ class FormValidator {
   };
 
    // Функция скрытия состояния ошибки валидации
-  _hideInputEror = (inputListElement) => {
+  _hideInputError = (inputListElement) => {
     this._errorElement = this._form.querySelector(`#${inputListElement.id}-error`);
     inputListElement.classList.remove(this._inputErrorClass);
     this._errorElement.classList.remove(this._errorClass);
@@ -53,7 +53,7 @@ class FormValidator {
       if (inputListElement.validity.valid) {
       // Если поле заполнено корректно
       // border-bottom по умолчанию, скрываем span с ошибкой
-      this._hideInputEror(inputListElement);
+      this._hideInputError(inputListElement);
       } else {
       // Если поле имеет невалидные данные
       // border-bottom инпута красный, выводим span с ошибкой
