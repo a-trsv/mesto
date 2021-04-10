@@ -9,6 +9,14 @@ class FormValidator {
      this._errorClass = validSettings.errorClass;
   } 
 
+  resetValidation() {
+    this._inputList.forEach((inputElement) => {
+      this._hideInputEror(inputElement)
+    });
+
+    this._toggleSaveButtonState();
+  }
+
   // Определяем хотя бы один инпут невалидный?
   _isInputInvalid = () => {
       return this._inputList.some(inputElement => !inputElement.validity.valid);

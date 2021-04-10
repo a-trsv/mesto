@@ -81,12 +81,16 @@ function regPopUpMissedClick(evt) {
 function togglePopUp() {
   openPopup(popUpEdit);
   getCurrentNameAndJob ();
+  // Удаляем ошибки валидации для формы профиля
+  editFormValidator.resetValidation();
 }
 
 // Открываем попап для добавления карточки
 function togglePopUpAdd() {
   openPopup(popUpAdd);
   formElementAdd.reset();
+  // Удаляем ошибки валидации для формы добавления карточки
+  cardFormValidator.resetValidation();
 }
 
 // Получаем актуальные значения в placeholder
