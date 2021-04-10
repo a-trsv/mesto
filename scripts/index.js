@@ -3,7 +3,8 @@ import { Card } from './Card.js';
 import { initialCards, validSettings } from './constants.js';
 import { FormValidator } from './FormValidator.js';
 //Sprint7
-
+// Задаем имя для контейнера для формирования карточек
+const container = document.querySelector('.elements');
 // Задаем имя для попапа редактирования имени и деятельности
 const popUpEdit = document.querySelector('.popup_type_edit');
 
@@ -49,13 +50,8 @@ const closePopUpPhotoButton = document.querySelector('.popup__close-button_type_
 function openPopup(popup) {
   popup.classList.add('popup_active');
   // Накладываем слушатель клика ESC
-  formElementAdd.reset();
   document.addEventListener('keydown', regESCButtonPressed);
   document.addEventListener('click', regPopUpMissedClick);
-  // Sprint 7
-  // Подключаем валидацию форм в момент открытия попапа
-  editFormValidator.enableValidation();
-  cardFormValidator.enableValidation();
 }
 
 // Ищем уже открытый попап и закрываем его
@@ -90,6 +86,7 @@ function togglePopUp() {
 // Открываем попап для добавления карточки
 function togglePopUpAdd() {
   openPopup(popUpAdd);
+  formElementAdd.reset();
 }
 
 // Получаем актуальные значения в placeholder
@@ -115,7 +112,6 @@ function addTaskFormListener(evt) {
 	const inputTitle = inputName.value;
   const inputLink = inputSRC.value;
   renderCard({ name: inputTitle, link: inputLink}, true);
-  formElementAdd.reset();
   closePopUp();
 }
 
@@ -126,7 +122,6 @@ function createCard (item) {
 
 function renderCard (item, toEnd) {
   const card = createCard(item);
-  const container = document.querySelector('.elements');
   const method = toEnd ? 'prepend' : 'append';
   container[method](card);
 }
@@ -134,6 +129,10 @@ function renderCard (item, toEnd) {
 initialCards.forEach((item) => {
   renderCard(item);
 });
+
+// Sprint 7
+editFormValidator.enableValidation();
+cardFormValidator.enableValidation();
 
 // Сохранить введенные данные для создания карточки и обновить содержимое всех карточек
 formElementAdd.addEventListener('submit', addTaskFormListener);
