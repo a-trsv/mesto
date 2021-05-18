@@ -1,4 +1,4 @@
-import { Card } from '../components/Card.js';
+import Card from '../components/Card.js';
 import { 
   initialCards, 
   validSettings, 
@@ -17,11 +17,14 @@ import {
   inputName,
   inputSRC
 } from '../components/constants.js';
-import { FormValidator } from '../components/FormValidator.js';
-import { Section } from '../components/Section.js';
+import FormValidator from '../components/FormValidator.js';
+import Section from '../components/Section.js';
 import PopUpWithForm from '../components/PopupWithForm.js';
 import PopupWithImage from '../components/PopupWithImage.js';
-import UserInfo from '../components/UserInfo.js'
+import UserInfo from '../components/UserInfo.js';
+
+import '../pages/index.css';
+import html from '../index.html';
 
 // Попап для редактирования имени и деятельности
 const userInfo = new UserInfo({profileTitleSelector, profileCaptionSelector})

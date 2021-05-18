@@ -1,4 +1,4 @@
-class FormValidator {
+export default class FormValidator {
   constructor(validSettings, form) {
      this._validSettings = validSettings;
      this._form = form;
@@ -90,8 +90,4 @@ class FormValidator {
           // затем навешиваем свой слушатель на инпуты формы
           this._getInputListeners();
   }
-}
-
-export {
-  FormValidator
 }
