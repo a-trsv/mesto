@@ -5,7 +5,7 @@ export const initialCards = [
     },
     {
       name: 'Челябинская область',
-      link: 'http://dvd-rw.ru/chelyabinsk-oblast.jpg'
+      link: 'https://pcali.ru/wp-content/uploads/chelyabinsk-oblast.jpg'
     },
     {
       name: 'Иваново',
