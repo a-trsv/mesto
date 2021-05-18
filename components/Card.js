@@ -1,11 +1,11 @@
-import { popUpPhotoSRC, popUpPhotoCaption, openPopup, popUpPhoto } from './index.js'
 class Card {
-  constructor(item, cardSelector) {
+  constructor(item, cardSelector, handleCardClick) {
     this._name = item.name
     this._url = item.link
     // Подпись для попапа с картинкой
     this._caption = item.name
     this._cardSelector = cardSelector
+    this._handleCardClick = handleCardClick
   }
 
   _getTemplate() {
@@ -27,7 +27,7 @@ class Card {
 		});
     // Слушатель клика на картинку для открытия попапа
     this._element.querySelector('.element__image').addEventListener('click', () => {
-      this._handleOpenImageClick();
+      this._handleCardClick(this._url, this._caption); // ведет к popupWithImage.open()
     })
 	}
 
@@ -40,7 +40,6 @@ class Card {
   }
 
   _handleOpenImageClick() {
-    openPopup(popUpPhoto); // Применяем общую функцию открытия попапа
     popUpPhotoSRC.src = this._url;
     popUpPhotoSRC.alt = ('Крупным планом:' + ' ' + this._name);
     popUpPhotoCaption.textContent = this._name;
