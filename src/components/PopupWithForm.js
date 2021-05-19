@@ -36,15 +36,3 @@ export default class PopUpWithForm extends Popup {
         super.close()
     }
 }
-
-// fuction addCardSubmitHandler(data) {
-//     const card = new Card(data) // Смотри Card.js
-//     prepend...
-// }
-
-// fuction editProfileHandler() {
-//    zamenyam starie dannie iz inputa formi
-// }
-
-// const addCardPopup = new PopUpWithForm('.popup_type_add', addCardSubmitHandler())
-// const editProfilePopup = new PopUpWithForm('.popup_type_edit', editProfileHandler())
