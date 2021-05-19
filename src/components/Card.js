@@ -1,4 +1,4 @@
-export default class Card {
+class Card {
   constructor(item, cardSelector, handleCardClick) {
     this._name = item.name
     this._url = item.link
@@ -56,3 +56,7 @@ export default class Card {
     
     }
   }
+
+export {
+  Card
+}
