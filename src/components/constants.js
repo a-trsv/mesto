@@ -58,11 +58,10 @@ export const popUpAdd = document.querySelector('.popup_type_add');
 export const newName = document.querySelector('.form__input_type_name');
 export const newJob = document.querySelector('.form__input_type_job');
 
-// Задаем имя для контейнера для формирования карточек
-export const container = document.querySelector('.elements');
-
 // Создаем константы для работы шаблона с карточками
 export const formElementAdd = document.querySelector('.form_type_add');
 // Для работы с отображением полного вида картинок
 export const inputName = formElementAdd.querySelector('.form__input_type_addTitle');
 export const inputSRC = formElementAdd.querySelector('.form__input_type_addURL');
+export const escEvtKey = "Escape";
+export const cardTemplate = '.cardsTemplate';

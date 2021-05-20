@@ -10,3 +10,7 @@
   position: relative;
 }
 
+.element__image:hover { 
+  cursor: pointer; 
+}
+

@@ -1,12 +1,14 @@
 class FormValidator {
   constructor(validSettings, form) {
-     this._validSettings = validSettings;
-     this._form = form;
-     this._inputSelector = validSettings.inputSelector
-     this._submitButtonSelector = validSettings.submitButtonSelector;
-     this._inactiveButtonClass = validSettings.inactiveButtonClass;
-     this._inputErrorClass = validSettings.inputErrorClass;
-     this._errorClass = validSettings.errorClass;
+    this._validSettings = validSettings;
+    this._form = form;
+    this._inputSelector = validSettings.inputSelector
+    this._submitButtonSelector = validSettings.submitButtonSelector;
+    this._inactiveButtonClass = validSettings.inactiveButtonClass;
+    this._inputErrorClass = validSettings.inputErrorClass;
+    this._errorClass = validSettings.errorClass;
+    this._inputList = Array.from(this._form.querySelectorAll(this._inputSelector));
+    this._saveButtonElement = this._form.querySelector(this._submitButtonSelector);
   } 
 
   resetValidation() {
@@ -62,10 +64,6 @@ class FormValidator {
   };
 
   _getInputListeners = () => {
-      // Находим все инпуты в любой форме на странице
-      // Находим кнопку сабмита
-      this._inputList = Array.from(this._form.querySelectorAll(this._inputSelector));
-      this._saveButtonElement = this._form.querySelector(this._submitButtonSelector);
       // Для каждого инпута нужно добавить слушатель,
       // нужно проверить на валидность заполненого поля,
       // изменить состояние кнопки сабмита (отключаем кнопку если поля не валидны)

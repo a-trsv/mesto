@@ -47,10 +47,11 @@ class Card {
 
   generateCard() {
     this._element = this._getTemplate();
-
-    this._element.querySelector('.element__title').textContent = this._name;
-    this._element.querySelector('.element__image').src = this._url;
-    this._element.querySelector('.element__image').alt = ('На фото:' + ' ' + this._name);
+    this._cardCaption = this._element.querySelector('.element__title');
+    this._cardImage = this._element.querySelector('.element__image');
+    this._cardCaption.textContent = this._name;
+    this._cardImage.src = this._url;
+    this._cardImage.alt = ('На фото: ' + ' ' + this._name);
     this._setEventListeners(); // навесим слушатели кликов лайка и удаления карточик
     return this._element;
     

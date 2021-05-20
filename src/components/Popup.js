@@ -1,3 +1,4 @@
+import {escEvtKey} from './constants.js'
 export default class Popup {
     constructor(popUpSelector) {
         this._popup = document.querySelector(popUpSelector)
@@ -8,18 +9,18 @@ export default class Popup {
     open() {
         this._popup.classList.add('popup_active');
         document.addEventListener('keydown', this._handleEscClose);
-        document.addEventListener('click', this._regPopUpMissedClick);
+        document.addEventListener('mousedown', this._regPopUpMissedClick);
        
     }
 
     close() {
         this._popup.classList.remove('popup_active')
         document.removeEventListener('keydown', this._handleEscClose);
-        document.removeEventListener('click', this._regPopUpMissedClick);
+        document.removeEventListener('mousedown', this._regPopUpMissedClick);
     }
 
     _handleEscClose(evt) {
-        if(evt.key === "Escape") {
+        if(evt.key === escEvtKey) {
             this.close();
         }
     }

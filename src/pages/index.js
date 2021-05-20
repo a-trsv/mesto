@@ -12,10 +12,10 @@ import {
   popUpEdit,
   popUpAdd,
   newName, 
-  newJob, 
-  container,
+  newJob,
   inputName,
-  inputSRC
+  inputSRC,
+  cardTemplate
 } from '../components/constants.js';
 import { FormValidator } from '../components/FormValidator.js';
 import { Section } from '../components/Section.js';
@@ -58,11 +58,16 @@ openAddForm.addEventListener(
     cardFormValidator.resetValidation();
   }
 )
+
+function createCardFunction(item, cardTemplate, cardImageClickHandler) {
+  const card = new Card(item, cardTemplate, cardImageClickHandler);
+  return card.generateCard();
+}
+
 // Сабмит для попапа для добавления карточек
 function addCardSubmitHandler() {
-  const card = new Card ({name: inputName.value, link: inputSRC.value}, '.cardsTemplate', cardImageClickHandler);
-  const newCard = card.generateCard()
-  container.prepend(newCard)
+  const card = createCardFunction({name: inputName.value, link: inputSRC.value}, cardTemplate, cardImageClickHandler);
+  cardsList.addItem(card)
   popupAdd.close();
 }
 
@@ -77,9 +82,8 @@ function cardImageClickHandler(url, text) {
 const cardsList = new Section({
   items: initialCards,
   renderer: (item) => {
-    const card = new Card(item, '.cardsTemplate', cardImageClickHandler);
-    const cardElement = card.generateCard();
-    cardsList.addItem(cardElement);
+    const card = createCardFunction(item, cardTemplate, cardImageClickHandler);
+    cardsList.addItem(card);
     },
   }, cardListSection);
 // отрисовка карточек
