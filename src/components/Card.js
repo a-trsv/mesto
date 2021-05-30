@@ -58,6 +58,7 @@ class Card {
     this._item.likes.forEach(everyLike => {
       if(everyLike._id.includes(this._thisUser)) {
         boolean = true
+        console.log('est nashi laiki')
       }
     })
     return boolean
@@ -81,6 +82,7 @@ class Card {
     this._cardImage.alt = ('На фото: ' + ' ' + this._name);
     this._setEventListeners(); // навесим слушатели кликов лайка и удаления карточки
     
+    // После обновления страницы, проверяем, может мы уже поставили лайк 
     if(this.likeActive()) {
       this._likeButton.classList.add('element__like-button_active')
     }
