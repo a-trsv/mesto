@@ -17,13 +17,14 @@ class Card {
     .querySelector(this._cardSelector)
     .content
     .querySelector('.element')
-    .cloneNode(true);
+    .cloneNode(true)
   
-    return cardElement;
+    return cardElement
   }
 
   _setEventListeners() {
     this._likeButton.addEventListener('click', () => {
+      // Если мы уже ставили лайк карточке, то можем его снять
         if(this.likeActive()){
           this.api.deleteLike(this._item._id)
           .then(item => {
@@ -32,6 +33,7 @@ class Card {
             this._like.textContent = item.likes.length
           })
         } else {
+          // Если мы еще не ставили лайк карточке, то можем его поставить
           this.api.setLike(this._item._id)
           .then(item => {
             this._item.likes = item.likes
@@ -68,20 +70,20 @@ class Card {
 
   _handleOpenImageClick() {
     popUpPhotoSRC.src = this._url;
-    popUpPhotoSRC.alt = ('Крупным планом:' + ' ' + this._name);
-    popUpPhotoCaption.textContent = this._name;
+    popUpPhotoSRC.alt = ('Крупным планом:' + ' ' + this._name)
+    popUpPhotoCaption.textContent = this._name
   }
 
   generateCard() {
     this._element = this._getTemplate();
     this._deleteButton = this._element.querySelector('.element__delete-button')
-    this._cardCaption = this._element.querySelector('.element__title');
-    this._cardImage = this._element.querySelector('.element__image');
+    this._cardCaption = this._element.querySelector('.element__title')
+    this._cardImage = this._element.querySelector('.element__image')
     this._likeButton = this._element.querySelector('.element__like-button')
     this._like = this._element.querySelector('.element__like-count')
-    this._cardCaption.textContent = this._name;
-    this._cardImage.src = this._url;
-    this._cardImage.alt = ('На фото: ' + ' ' + this._name);
+    this._cardCaption.textContent = this._name
+    this._cardImage.src = this._url
+    this._cardImage.alt = ('На фото: ' + ' ' + this._name)
     this._setEventListeners(); // навесим слушатели кликов лайка и удаления карточки
 
     // После обновления страницы, проверяем, может мы уже поставили лайк 
@@ -91,7 +93,7 @@ class Card {
    
     // Рисуем проставленные другими юзерами лайки, если таких нет, пишем 0
     if (this._item.likes.length > 0) {
-      this._like.textContent = this._item.likes.length;
+      this._like.textContent = this._item.likes.length
     } else {
       this._like.textContent = '0';
     }
@@ -105,7 +107,7 @@ class Card {
       this._deleteButton.classList.add('element__delete-button_type_hidden')
     }
 
-    return this._element;
+    return this._element
     }
   }
 
