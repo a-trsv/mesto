@@ -51,6 +51,7 @@ class Card {
 	}
 
   likeActive() {
+    // Если наших лайков нет
     let boolean = false
     // Получаем все лайки на всех карточках страницы
     // Проверяем все лайки на странице на наличие в них нашего id
@@ -58,10 +59,11 @@ class Card {
     this._item.likes.forEach(everyLike => {
       if(everyLike._id.includes(this._thisUser)) {
         boolean = true
-        console.log('est nashi laiki')
+       // Поиск обнаружен наши лайки, может снимать лайк
       }
     })
     return boolean
+    // Наших лайков нет, снимать лайки нельзя
   }
 
   _handleOpenImageClick() {
@@ -81,7 +83,7 @@ class Card {
     this._cardImage.src = this._url;
     this._cardImage.alt = ('На фото: ' + ' ' + this._name);
     this._setEventListeners(); // навесим слушатели кликов лайка и удаления карточки
-    
+
     // После обновления страницы, проверяем, может мы уже поставили лайк 
     if(this.likeActive()) {
       this._likeButton.classList.add('element__like-button_active')
@@ -92,7 +94,6 @@ class Card {
       this._like.textContent = this._item.likes.length;
     } else {
       this._like.textContent = '0';
-       //console.log('laikov net :((')
     }
 
     //console.log(this._item.owner._id)
