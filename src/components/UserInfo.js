@@ -8,7 +8,8 @@ export default class UserInfo {
     getUserInfo() {
         const userInfoObj = {
             name: this._name.textContent,
-            about: this._job.textContent
+            about: this._job.textContent,
+            avatar: this._avatar.src
         }
         return userInfoObj
     }
@@ -20,8 +21,7 @@ export default class UserInfo {
     }
 
     getUserId() {
-        const userId = this._id
-        return userId
+       return this._id
     }
     
     // Выкладываем адрес картинки с сервера

@@ -11,6 +11,7 @@ export const cardListSection = '.elements'
 
 // Sprint 8, перенос констант из index.js, согласно ТЗ
 // Объявление селекторов
+export const popUpImage = '.popup_type_photo'
 export const popUpSelector = '.popup_type_edit'
 export const popUpAddCardSelector = '.popup_type_add'
 export const popUpDelSelector = '.popup_type_delete'
@@ -18,6 +19,7 @@ export const profileAvatarSelector = '.profile__avatar'
 export const profileAvatarFormSelector = '.popup_type_avatar'
 export const profileTitleSelector = '.profile__title'
 export const profileCaptionSelector = '.profile__caption'
+
 
 // Кнопки
 // Кнопка для попапа изменения имени и деятельности

@@ -4,27 +4,17 @@ export default class Api {
         this._groupId = options.groupId
         this._token = options.token
     }
-    getUserApi() {
+    getUserInfo() {
         return fetch(`${this._address}/${this._groupId}/users/me`, {
             headers: {
                 authorization: this._token,
                 'Content-Type': 'application/json'
             }
         })
-        .then(res => {
-            if (res.ok) {
-                return res.json()
-            }
-           // Если происходит ошибка, отклоняем промис
-           return Promise.reject(`${res.status}`)
-        })
-        // Если сервер не ответил, выводим ошибку в консоль
-        .catch((err) => {
-            console.log(err)
-        })
+         .then(res => this._checkServerResponse(res))
     }
 
-    patchUserApi({name: inputName, about: inputJob}) {
+    patchUserInfo({name: inputName, about: inputJob}) {
         return fetch(`${this._address}/${this._groupId}/users/me`, {
             method: 'PATCH',
             headers: {
@@ -36,17 +26,7 @@ export default class Api {
                 about: inputJob,
             })
     })
-        .then(res => {
-            if (res.ok) {
-                return res.json()
-            }
-            // Если происходит ошибка, отклоняем промис
-            return Promise.reject(`${res.status}`)
-        })
-        // Если сервер не ответил, выводим ошибку в консоль
-        .catch((err) => {
-            console.log(err)
-        })
+        .then(res => this._checkServerResponse(res))    
     }
 
     getCards() {
@@ -56,17 +36,7 @@ export default class Api {
                 'Content-Type': 'application/json'
             }
         })
-        .then(res => {
-            if (res.ok) {
-                return res.json()
-            }
-           // Если происходит ошибка, отклоняем промис
-           return Promise.reject(`${res.status}`)
-        })
-        // Если сервер не ответил, выводим ошибку в консоль
-        .catch((err) => {
-            console.log(err)
-        })
+        .then(res => this._checkServerResponse(res)) 
     }
     postCard({name: inputName, link: inputSRC}) {
         return fetch(`${this._address}/${this._groupId}/cards`, {
@@ -80,18 +50,8 @@ export default class Api {
                 link: inputSRC
             })
         })
-        .then(res => {
-            if (res.ok) {
-                return res.json()
-            }
-           // Если происходит ошибка, отклоняем промис
-            return Promise.reject(`${res.status}`)
-        })
-        // Если сервер не ответил, выводим ошибку в консоль
-        .catch((err) => {
-            console.log(err)
-        })
-    }
+        .then(res => this._checkServerResponse(res)) 
+        }
     deleteCard(cardId){
         return fetch(`${this._address}/${this._groupId}/cards/${cardId}`, {
             method: 'DELETE',
@@ -99,18 +59,8 @@ export default class Api {
                 authorization: this._token,
             }
         })
-            .then(res => {
-                if (res.ok) {
-                    return res.json()
-                }
-               /// Если происходит ошибка, отклоняем промис
-            return Promise.reject(`${res.status}`)
-            })
-            // Если сервер не ответил, выводим ошибку в консоль
-        .catch((err) => {
-            console.log(err)
-        })
-    }
+        .then(res => this._checkServerResponse(res)) 
+        }
     setLike(cardId){
         return fetch(`${this._address}/${this._groupId}/cards/likes/${cardId}`, {
             method: 'PUT',
@@ -118,17 +68,7 @@ export default class Api {
                 authorization: this._token,
             }
         })
-            .then(res => {
-                if (res.ok) {
-                    return res.json()
-                }
-               // Если происходит ошибка, отклоняем промис
-            return Promise.reject(`${res.status}`)
-            })
-            // Если сервер не ответил, выводим ошибку в консоль
-        .catch((err) => {
-            console.log(err)
-        })
+        .then(res => this._checkServerResponse(res)) 
     }
     deleteLike(cardId){
         return fetch(`${this._address}/${this._groupId}/cards/likes/${cardId}`, {
@@ -137,17 +77,7 @@ export default class Api {
                 authorization: this._token,
             }
         })
-            .then(res => {
-                if (res.ok) {
-                    return res.json()
-                }
-               // Если происходит ошибка, отклоняем промис
-            return Promise.reject(`${res.status}`)
-            })
-            // Если сервер не ответил, выводим ошибку в консоль
-        .catch((err) => {
-            console.log(err)
-        })
+        .then(res => this._checkServerResponse(res)) 
     }
     patchUserAvatar(avatarSRC) {
         return fetch(`${this._address}/${this._groupId}/users/me/avatar`, {
@@ -160,16 +90,15 @@ export default class Api {
                avatar: avatarSRC
             })
     })
-        .then(res => {
-            if (res.ok) {
-                return res.json()
-            }
-        // Если происходит ошибка, отклоняем промис
-        return Promise.reject(`${res.status}`)
-        })  
-        // Если сервер не ответил, выводим ошибку в консоль
-        .catch((err) => {
-            console.log(err)
-        })
+        .then(res => this._checkServerResponse(res))  
+    }
+
+    _checkServerResponse(res) {
+        if (res.ok) {
+            return res.json()
         }
+    // Если происходит ошибка, отклоняем промис
+    return Promise.reject(`${res.status}`)
+    }
+        
 }

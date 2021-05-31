@@ -1,15 +1,16 @@
 class Card {
-  constructor(item, cardSelector, thisUser, handleCardClick, deleteCardClick, api) {
+  constructor(item, cardSelector, user, handleCardClick, deleteCardClick, {setLike, deleteLike}) {
     this._name = item.name
     this._url = item.link
     this._id = item._id
-    this.api = api
     this._item = item
-    this._thisUser = thisUser
+    this._user = user
     this._caption = item.name
     this._cardSelector = cardSelector
     this._handleCardClick = handleCardClick
     this._deleteCardClick = deleteCardClick
+    this._setLike = setLike
+    this._deleteLike = deleteLike
   }
 
   _getTemplate() {
@@ -25,21 +26,13 @@ class Card {
   _setEventListeners() {
     this._likeButton.addEventListener('click', () => {
       // Если мы уже ставили лайк карточке, то можем его снять
-        if(this.likeActive()){
-          this.api.deleteLike(this._item._id)
-          .then(item => {
-            this._item.likes = item.likes
-            this._likeButton.classList.remove('element__like-button_active')
-            this._like.textContent = item.likes.length
-          })
+        if(this.islikeActive()){
+          this._deleteLike(this._item._id)
+          this._removeLike(this._item._id)
         } else {
           // Если мы еще не ставили лайк карточке, то можем его поставить
-          this.api.setLike(this._item._id)
-          .then(item => {
-            this._item.likes = item.likes
-            this._likeButton.classList.add('element__like-button_active')
-            this._like.textContent = item.likes.length
-          })
+          this._setLike(this._item._id)
+          this._setLikeActive(this._item._id)
         }
       
 		});
@@ -52,19 +45,32 @@ class Card {
     })
 	}
 
-  likeActive() {
+  setLikes(item) {
+    this._item.likes = item.likes
+    this._like.textContent = item.likes.length
+  }
+
+  _setLikeActive() {
+    this._likeButton.classList.add('element__like-button_active')
+  }
+
+  _removeLike() {
+    this._likeButton.classList.remove('element__like-button_active')
+  }
+
+  islikeActive() {
     // Если наших лайков нет
-    let boolean = false
+    let likeIsActive = false
     // Получаем все лайки на всех карточках страницы
     // Проверяем все лайки на странице на наличие в них нашего id
     // возвращаем тру, если нашли, если нет, то возвращаем ошибочку
     this._item.likes.forEach(everyLike => {
-      if(everyLike._id.includes(this._thisUser)) {
-        boolean = true
+      if(everyLike._id.includes(this._user)) {
+        likeIsActive = true
        // Поиск обнаружен наши лайки, может снимать лайк
       }
     })
-    return boolean
+    return likeIsActive
     // Наших лайков нет, снимать лайки нельзя
   }
 
@@ -87,7 +93,7 @@ class Card {
     this._setEventListeners(); // навесим слушатели кликов лайка и удаления карточки
 
     // После обновления страницы, проверяем, может мы уже поставили лайк 
-    if(this.likeActive()) {
+    if(this.islikeActive()) {
       this._likeButton.classList.add('element__like-button_active')
     }
    
@@ -100,7 +106,7 @@ class Card {
 
     //console.log(this._item.owner._id)
     // Сравнивам строки, если _id совпадают, то это я создал карточку и могу ее удалить
-    if(this._thisUser === this._item.owner._id) {
+    if(this._user === this._item.owner._id) {
       this._deleteButton.classList.remove('element__delete-button_type_hidden')
     } else {
       // чужое удалить нельзя, скрываем иконку
