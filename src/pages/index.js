@@ -23,13 +23,13 @@ import {
   popUpDelSelector,
   popUpDeleteCard,
   popUpImage
-} from '../components/utils/constants.js';
+} from '../utils/constants.js';
 import { FormValidator } from '../components/FormValidator.js';
 import { Section } from '../components/Section.js';
 import PopUpWithForm from '../components/PopupWithForm.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import UserInfo from '../components/UserInfo.js';
-import {renderLoading} from '../components/utils/utils.js'
+import {renderLoading} from '../utils/utils.js'
 import './index.css';
 
 // Sprint 9
@@ -112,6 +112,10 @@ function uploadAvatarHandler() {
   api.patchUserAvatar(avatarSRC)
   .then(() => {
     userInfo.setUserAvatar(avatarSRC)
+    // Можно добавить проверку на введенные данные для Аватара, 
+    // если ответ некорретный, то можно создать новый попап с 
+    // указанной ошибкой и предложить пользователю ввести данные
+    // еще раз
     popupAvatarForm.close()
   })
    // Если сервер не ответил, выводим ошибку в консоль

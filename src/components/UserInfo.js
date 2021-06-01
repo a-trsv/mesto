@@ -15,9 +15,16 @@ export default class UserInfo {
     }
 
     setUserInfo({name, about, id}) {
-        this._name.textContent = name
-        this._job.textContent = about
-        this._id = id
+        if({name, about, id}) {
+            //console.log('Данные карточки загружены успешно')
+            this._name.textContent = name
+            this._job.textContent = about
+            this._id = id
+        }
+        else {
+            console.log('Ошибка загрузки данных!')
+        }
+       
     }
 
     getUserId() {
@@ -26,6 +33,11 @@ export default class UserInfo {
     
     // Выкладываем адрес картинки с сервера
     setUserAvatar(avatar) {
+       if (avatar) {
+        //console.log('Аватар успешно загружен')
         this._avatar.src = avatar
+       } else {
+           console.log('Возникла ошибка загрузки Аватара')
+       }
     }
 }

@@ -1,4 +1,4 @@
-import {escEvtKey} from './utils/constants.js'
+import {escEvtKey} from '../utils/constants.js'
 export default class Popup {
     constructor(popUpSelector) {
         this._popup = document.querySelector(popUpSelector)
